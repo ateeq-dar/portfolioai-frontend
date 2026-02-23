@@ -33,11 +33,14 @@ const Chat = () => {
     setMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/chat`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        }
+      );
 
       const data = await response.json();
 
@@ -110,8 +113,8 @@ const Chat = () => {
                   <div
                     key={index}
                     className={`p-3 rounded-lg text-sm max-w-[75%] ${msg.role === "user"
-                        ? "bg-blue-600 ml-auto text-white"
-                        : "bg-gray-800 text-gray-300"
+                      ? "bg-blue-600 ml-auto text-white"
+                      : "bg-gray-800 text-gray-300"
                       }`}
                   >
                     {msg.role === "ai" ? (
